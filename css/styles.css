@@ -456,6 +456,12 @@ h1 {
   color: var(--teal);
 }
 
+.calendly-link {
+  color: var(--teal);
+  border-bottom-color: var(--teal);
+  font-weight: 500;
+}
+
 .contact-form {
   display: flex;
   flex-direction: column;
