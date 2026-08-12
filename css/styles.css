@@ -1,0 +1,674 @@
+/* ===================================================
+   Variables
+=================================================== */
+:root {
+  --canvas:  #F7F6F3;
+  --ink:     #1A1F2E;
+  --slate:   #4B5568;
+  --teal:    #1E7A8A;
+  --surface: #EDEBE7;
+  --border:  #D4D0C9;
+
+  --max-w: 1100px;
+  --nav-h: 64px;
+  --sec-pad-v: 5rem;
+  --sec-pad-h: 1.5rem;
+}
+
+/* ===================================================
+   Reset & Base
+=================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--ink);
+  background: var(--canvas);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  transition: color 0.2s;
+}
+
+/* ===================================================
+   Utility
+=================================================== */
+.bg-surface {
+  background: var(--surface);
+}
+
+.section-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: var(--sec-pad-v) var(--sec-pad-h);
+}
+
+.section-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+  margin-bottom: 0.4rem;
+}
+
+.overline {
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+}
+
+h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 2.5rem;
+}
+
+/* ===================================================
+   Nav
+=================================================== */
+#nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--nav-h);
+  background: var(--canvas);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--sec-pad-h);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-links a {
+  font-size: 0.875rem;
+  text-decoration: none;
+  color: var(--slate);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--teal);
+}
+
+/* Hamburger button */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ===================================================
+   Hero
+=================================================== */
+#hero {
+  padding-top: calc(var(--nav-h) + 4.5rem);
+  padding-bottom: 5rem;
+  padding-left: var(--sec-pad-h);
+  padding-right: var(--sec-pad-h);
+  background: radial-gradient(ellipse 55% 60% at 20% 60%, rgba(30, 122, 138, 0.07) 0%, transparent 70%);
+}
+
+.hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 55fr 45fr;
+  gap: 4rem;
+  align-items: center;
+  min-height: calc(100vh - var(--nav-h) - 9.5rem);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: clamp(2.6rem, 5vw, 3.8rem);
+  line-height: 1.05;
+  color: var(--ink);
+  margin-top: 0.25rem;
+}
+
+.hero-tagline {
+  font-size: 1.125rem;
+  color: var(--slate);
+  max-width: 460px;
+  line-height: 1.6;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 2.5rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.hero-stat-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: var(--teal);
+  line-height: 1;
+}
+
+.hero-stat-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--slate);
+}
+
+.hero-ctas {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.btn-primary {
+  display: inline-block;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #fff;
+  background: var(--teal);
+  text-decoration: none;
+  padding: 0.7rem 1.75rem;
+  border-radius: 4px;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:hover {
+  opacity: 0.85;
+  color: #fff;
+}
+
+.text-link {
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: var(--ink);
+  border-bottom: 1.5px solid var(--teal);
+  padding-bottom: 2px;
+}
+
+.text-link:hover {
+  color: var(--teal);
+}
+
+.hero-photo {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.hero-photo img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+/* ===================================================
+   About
+=================================================== */
+.bio {
+  max-width: 720px;
+  color: var(--ink);
+  margin-bottom: 2rem;
+}
+
+.throughlines {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: var(--slate);
+}
+
+.tl-dot {
+  color: var(--border);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* ===================================================
+   Experience
+=================================================== */
+.exp-entry {
+  display: grid;
+  grid-template-columns: 28% 1fr;
+  gap: 2.5rem;
+  padding-bottom: 2.75rem;
+  margin-bottom: 2.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.exp-entry:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.exp-company {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+}
+
+.exp-role {
+  font-size: 0.875rem;
+  color: var(--slate);
+  margin-bottom: 0.35rem;
+}
+
+.exp-date {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--slate);
+}
+
+.exp-bullets {
+  list-style: disc;
+  padding-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.exp-bullets li {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.metric {
+  font-weight: 500;
+  color: var(--teal);
+}
+
+/* ===================================================
+   Skills
+=================================================== */
+.skills-intro {
+  font-size: 0.9375rem;
+  color: var(--slate);
+  margin-top: -1.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+
+.skills-group-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+  margin-bottom: 1rem;
+}
+
+.skills-group ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skills-group li {
+  font-size: 0.9375rem;
+  color: var(--ink);
+}
+
+/* ===================================================
+   Resources
+=================================================== */
+.resources-placeholder {
+  display: inline-block;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 2rem 3rem;
+  color: var(--slate);
+  font-size: 0.9375rem;
+}
+
+/* ===================================================
+   Contact
+=================================================== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--slate);
+  margin-bottom: 0.3rem;
+}
+
+.contact-link {
+  font-size: 0.9375rem;
+  text-decoration: none;
+  color: var(--ink);
+  border-bottom: 1px solid var(--teal);
+  padding-bottom: 1px;
+  display: inline;
+}
+
+.contact-link:hover {
+  color: var(--teal);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.contact-form label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--slate);
+}
+
+.contact-form input,
+.contact-form textarea {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.9375rem;
+  color: var(--ink);
+  background: var(--canvas);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.65rem 0.875rem;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--teal);
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.contact-form button {
+  align-self: flex-start;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #fff;
+  background: var(--teal);
+  border: none;
+  border-radius: 4px;
+  padding: 0.7rem 1.75rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.contact-form button:hover {
+  opacity: 0.85;
+}
+
+.contact-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.form-success {
+  font-size: 0.9375rem;
+  color: var(--teal);
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--teal);
+  border-radius: 4px;
+  margin-bottom: 1.25rem;
+}
+
+/* data-fs-success/error are hidden by default via [hidden] attribute */
+[hidden] { display: none !important; }
+
+.form-global-error {
+  font-size: 0.875rem;
+  color: #b91c1c;
+  padding: 0.75rem 1rem;
+  border: 1px solid #fca5a5;
+  border-radius: 4px;
+  margin-bottom: 1.25rem;
+}
+
+.form-global-error:empty {
+  display: none;
+}
+
+.field-error {
+  display: block;
+  font-size: 0.8rem;
+  color: #b91c1c;
+  margin-top: 0.25rem;
+}
+
+.field-error:empty {
+  display: none;
+}
+
+.contact-form input[aria-invalid="true"],
+.contact-form textarea[aria-invalid="true"] {
+  border-color: #fca5a5;
+}
+
+/* ===================================================
+   Mobile — 768px and below
+=================================================== */
+@media (max-width: 768px) {
+  :root {
+    --sec-pad-v: 3.5rem;
+    --sec-pad-h: 1.25rem;
+  }
+
+  /* Nav */
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    background: var(--canvas);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 0.75rem 0 1rem;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 0.6rem var(--sec-pad-h);
+    font-size: 1rem;
+  }
+
+  /* Hero */
+  #hero {
+    padding-top: calc(var(--nav-h) + 2.5rem);
+    padding-bottom: 3.5rem;
+  }
+
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    min-height: auto;
+  }
+
+  .hero-stats {
+    gap: 1.5rem;
+  }
+
+  .hero-stat-value {
+    font-size: 1.35rem;
+  }
+
+  .hero-photo {
+    order: -1;
+    justify-content: center;
+  }
+
+  .hero-photo img {
+    max-width: 220px;
+    border-radius: 4px;
+  }
+
+  h1 {
+    font-size: clamp(2.2rem, 8vw, 2.8rem);
+  }
+
+  .hero-tagline {
+    font-size: 1rem;
+  }
+
+  /* Experience */
+  .exp-entry {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding-bottom: 2.25rem;
+    margin-bottom: 2.25rem;
+  }
+
+  /* Skills */
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* Contact */
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+/* ===================================================
+   Mobile — 480px and below
+=================================================== */
+@media (max-width: 480px) {
+  .resources-placeholder {
+    padding: 1.5rem;
+  }
+}
